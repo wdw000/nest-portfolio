@@ -25,7 +25,7 @@ import { Learning } from './entity/learning.entity';
       entities: [Skills, Project, Link, Learning],
       charset: 'utf8mb4',
       autoLoadEntities: true,
-      synchronize: true,
+      // synchronize: true,
     }),
     SkillsModule,
     LearningModule,
