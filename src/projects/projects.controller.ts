@@ -1,4 +1,16 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { multerProjectOptions } from 'src/lib/multerOptions';
+import { projectPost } from './dto/projects.dto';
 import { ProjectsService } from './projects.service';
 
 @Controller('projects')
@@ -7,21 +19,29 @@ export class ProjectsController {
 
   @Get()
   getProjects() {
-    return 'get projects data';
+    return this.projectsService.getAllProject();
   }
 
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [{ name: 'images' }, { name: 'pdf' }],
+      multerProjectOptions,
+    ),
+  )
   @Post()
-  addProjects() {
-    return 'add projects data';
+  addProjects(
+    @Body() data: projectPost,
+    @UploadedFiles()
+    files: {
+      images?: Array<Express.Multer.File>;
+      pdf?: Array<Express.Multer.File>;
+    },
+  ) {
+    return this.projectsService.addProject(files, data);
   }
 
-  @Put()
-  updateProjects() {
-    return 'update projects data';
-  }
-
-  @Delete()
-  deleteProjects() {
-    return 'delete projects data';
+  @Delete(':title')
+  deleteProjects(@Param('title') title: string) {
+    return this.projectsService.deleteProject(title);
   }
 }
