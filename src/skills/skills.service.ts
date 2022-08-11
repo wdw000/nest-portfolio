@@ -52,7 +52,6 @@ export class SkillsService {
   async deleteSkill(title: string) {
     const target = await this.findSkills(title);
     const imgPath = target.src.replace(process.env.SERVER_ADDRESS, '');
-    console.log(imgPath);
     unlinkSync(imgPath);
     return await this.delete(title);
   }
