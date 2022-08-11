@@ -120,5 +120,5 @@ export const multerProjectOptions: MulterOptions = {
 export const createFileURL = (file, category): string => {
   const serverAddress = process.env.SERVER_ADDRESS;
 
-  return `${serverAddress}public/${category}/${file.filename}`;
+  return `${serverAddress}/public/${category}/${file.filename}`;
 };
