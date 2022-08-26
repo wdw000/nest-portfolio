@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { unlink, unlinkSync } from 'fs';
+import { unlinkSync } from 'fs';
 import { Project } from 'src/entity/project.entity';
 import { getFileURL } from 'src/lib/uuidRandom';
 import { Repository } from 'typeorm';
-import { projectPost, Skill } from './dto/projects.dto';
+import { projectPost } from './dto/projects.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -15,7 +15,7 @@ export class ProjectsService {
 
   private async save(
     title: string,
-    skills: Skill[],
+    skills: string[],
     functions: string[],
     imgSrc: string,
     git: string | null,
