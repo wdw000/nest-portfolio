@@ -4,7 +4,7 @@ import { unlink, unlinkSync } from 'fs';
 import { Project } from 'src/entity/project.entity';
 import { getFileURL } from 'src/lib/uuidRandom';
 import { Repository } from 'typeorm';
-import { projectPost } from './dto/projects.dto';
+import { projectPost, Skill } from './dto/projects.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -15,7 +15,7 @@ export class ProjectsService {
 
   private async save(
     title: string,
-    skills: string[],
+    skills: Skill[],
     functions: string[],
     imgSrc: string,
     git: string | null,

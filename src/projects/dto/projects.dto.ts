@@ -1,18 +1,23 @@
-import { IsArray, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsArray, IsString } from 'class-validator';
+
+export interface Skill {
+  title: string;
+  src: string;
+}
 
 export class projectPost {
   @IsString()
-  title: string;
+  readonly title: string;
 
   @IsArray()
-  skills: string[];
+  readonly skills: Skill[];
 
   @IsArray()
-  functions: string[];
+  readonly functions: string[];
 
   @IsString()
-  git: string;
+  readonly git: string;
 
   @IsString()
-  web: string;
+  readonly web: string;
 }
