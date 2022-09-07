@@ -7,4 +7,7 @@ export class Learning {
 
   @Column()
   src: string;
+
+  @Column('timestamp', { default: () => 'CURRENT_TIMESTAMP' })
+  timestamp: number;
 }

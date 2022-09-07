@@ -35,7 +35,20 @@ export class ProjectsService {
   }
 
   private async findAllProject() {
-    return await this.projectRepository.find();
+    return await this.projectRepository.find({
+      select: {
+        functions: true,
+        git: true,
+        imgSrc: true,
+        pdf: true,
+        skills: true,
+        title: true,
+        web: true,
+      },
+      order: {
+        timestamp: 'ASC',
+      },
+    });
   }
 
   private async delete(title: string) {

@@ -20,7 +20,15 @@ export class SkillsService {
   }
 
   private async findAllSkills() {
-    const result = await this.skillsRepository.find();
+    const result = await this.skillsRepository.find({
+      select: {
+        src: true,
+        title: true,
+      },
+      order: {
+        timestamp: 'ASC',
+      },
+    });
 
     return result;
   }

@@ -10,4 +10,7 @@ export class Link {
 
   @Column()
   imgSrc: string;
+
+  @Column('timestamp', { default: () => 'CURRENT_TIMESTAMP' })
+  timestamp: number;
 }

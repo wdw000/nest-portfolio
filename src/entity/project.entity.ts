@@ -22,4 +22,7 @@ export class Project {
 
   @Column({ nullable: true })
   pdf: string;
+
+  @Column('timestamp', { default: () => 'CURRENT_TIMESTAMP' })
+  timestamp: number;
 }

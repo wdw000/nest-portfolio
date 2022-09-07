@@ -22,7 +22,15 @@ export class LearningService {
   }
 
   private async findAllLearning() {
-    return await this.learningRepository.find();
+    return await this.learningRepository.find({
+      select: {
+        src: true,
+        title: true,
+      },
+      order: {
+        timestamp: 'ASC',
+      },
+    });
   }
 
   private async delete(title: string) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { unlinkSync } from 'fs';
+import { truncate, unlinkSync } from 'fs';
 import { Link } from 'src/entity/link.entity';
 import { getFileURL } from 'src/lib/uuidRandom';
 import { Repository } from 'typeorm';
@@ -23,7 +23,16 @@ export class LinkService {
   }
 
   private async findAllLink() {
-    return await this.linkRepository.find();
+    return await this.linkRepository.find({
+      select: {
+        imgSrc: true,
+        imgURL: true,
+        title: true,
+      },
+      order: {
+        timestamp: 'ASC',
+      },
+    });
   }
 
   private async delete(title: string) {
