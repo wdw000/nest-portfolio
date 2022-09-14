@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { unlinkSync } from 'fs';
 import { Skills } from 'src/entity/skills.entity';
@@ -59,8 +59,13 @@ export class SkillsService {
 
   async deleteSkill(title: string) {
     const target = await this.findSkills(title);
-    const imgPath = target.src.replace(process.env.SERVER_ADDRESS, '');
-    unlinkSync(imgPath);
-    return await this.delete(title);
+
+    if (target) {
+      const imgPath = target.src.replace(process.env.SERVER_ADDRESS, '');
+      unlinkSync(imgPath);
+      return await this.delete(title);
+    } else {
+      throw new BadRequestException();
+    }
   }
 }

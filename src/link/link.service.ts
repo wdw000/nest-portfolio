@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { truncate, unlinkSync } from 'fs';
+import { unlinkSync } from 'fs';
 import { Link } from 'src/entity/link.entity';
 import { getFileURL } from 'src/lib/uuidRandom';
 import { Repository } from 'typeorm';
@@ -65,9 +65,14 @@ export class LinkService {
 
   async deleteLink(title: string) {
     const target = await this.findLink(title);
-    const imgPath = target.imgSrc.replace(process.env.SERVER_ADDRESS, '');
 
-    unlinkSync(imgPath);
-    await this.delete(title);
+    if (target) {
+      const imgPath = target.imgSrc.replace(process.env.SERVER_ADDRESS, '');
+
+      unlinkSync(imgPath);
+      return await this.delete(title);
+    } else {
+      throw new BadRequestException();
+    }
   }
 }
