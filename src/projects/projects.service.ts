@@ -46,7 +46,7 @@ export class ProjectsService {
         web: true,
       },
       order: {
-        timestamp: 'ASC',
+        timestamp: 'DESC',
       },
     });
   }

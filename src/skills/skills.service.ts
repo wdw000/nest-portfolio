@@ -26,7 +26,7 @@ export class SkillsService {
         title: true,
       },
       order: {
-        timestamp: 'ASC',
+        timestamp: 'DESC',
       },
     });
 

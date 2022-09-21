@@ -28,7 +28,7 @@ export class LearningService {
         title: true,
       },
       order: {
-        timestamp: 'ASC',
+        timestamp: 'DESC',
       },
     });
   }

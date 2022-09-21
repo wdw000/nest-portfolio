@@ -30,7 +30,7 @@ export class LinkService {
         title: true,
       },
       order: {
-        timestamp: 'ASC',
+        timestamp: 'DESC',
       },
     });
   }
